@@ -6,7 +6,7 @@ Most of the code has been written already in the form of google cloud functions,
 API instead, making it easier and more intuitive to get data and work with data in the firestore.
 
 ### TODO (deadline: Friday, May 15th)
-- [] Move over db utils and get authentication working through poke's service account
-- [] Seperate project into several apps based on functionality.
-- [] Create dataclasses for the serialization of objects stored in firestore.
+- [ ] Move over db utils and get authentication working through poke's service account
+- [ ] Seperate project into several apps based on functionality.
+- [ ] Create dataclasses for the serialization of objects stored in firestore.
 
