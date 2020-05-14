@@ -7,6 +7,6 @@ API instead, making it easier and more intuitive to get data and work with data 
 
 ### TODO (deadline: Friday, May 15th)
 - [x] Move over db utils and get authentication working through poke's service account
-- [ ] Seperate project into several apps based on functionality.
+- [x] Seperate project into several apps based on functionality.
 - [x] Create dataclasses for the serialization of objects stored in firestore.
 
