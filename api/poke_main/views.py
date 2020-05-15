@@ -11,7 +11,7 @@ import json
 def test(request):
     return JsonResponse({"Example Response": "Hello, world!"})
 
-
+@csrf_exempt
 def get_document(request, table, document):
     doc_ref = db.get_document(table, document)
     return JsonResponse(doc_ref)
