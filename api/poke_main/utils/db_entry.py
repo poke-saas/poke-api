@@ -46,9 +46,9 @@ def get():
     pass
 
 
-def set(loc, id, data):
-    doc_ref = DB.collection(loc).document(id)
-    doc_ref.set(data)
+# def set(loc, id, data):
+#     doc_ref = DB.collection(loc).document(id)
+#     doc_ref.set(data)
 
 
 def new(new_fn, set_fn):
