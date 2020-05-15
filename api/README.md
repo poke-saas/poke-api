@@ -1,6 +1,6 @@
 API Documentation
 -
-### Official API Documentation for Poke (for both you sake and mine)
+### Official API Documentation for Poke (for both your sake and mine)
 
 The poke client consumes a REST API to manage and receive data for the frontend. This is a brief document
 outlining which endpoints to use to accomplish specific tasks.
