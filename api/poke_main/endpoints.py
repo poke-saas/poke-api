@@ -8,5 +8,7 @@ urlpatterns = [
     path("test/", views.test, name='test'),
 
     # Picking up where cloud functions left off
-    path("get/<str:table>/<str:document>", views.get_document, name="Get Document")
+    # TODO: Make seperate Django apps for each base (firestore, services, auth)
+    # Firestore paths
+    path("firestore/get/<str:table>/<str:document>", views.get_document, name="Get Document")
 ]

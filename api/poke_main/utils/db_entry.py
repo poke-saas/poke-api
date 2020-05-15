@@ -78,6 +78,9 @@ def hash_string_sha256(to_hash):
     m.update(to_hash.encode())
     return m.hexdigest()
 
+def get_document(table, document_id):
+    return DB.collection(table).document(document_id).get().to_dict()
+
 
 ### USER HELPER METHODS
 def get_user_template():
