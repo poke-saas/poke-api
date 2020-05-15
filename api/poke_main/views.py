@@ -26,5 +26,28 @@ def refresh_pokes(request):
         org_id = user['org_id']
         pokes = validators.get_unfinished_pokes(uid, org_id)
         return JsonResponse({"pokes": pokes})
-    except KeyError:
-        return JsonResponse(None)
+    except Exception as e:
+        return JsonResponse({"pokes": None, "exception": e.__class__.__name__})
+
+@csrf_exempt
+def check_poke(request):
+    try:
+        body = request.body.decode('utf-8')
+        data = json.loads(body)
+        uid = data['uid']
+        poke_id = data['poke_id']
+        points = validators.check_poke(uid,
+                            poke_id)
+
+        if points is not None:
+            # Add the poke to the completed pokes list for the user
+            db.add_complete_poke(uid, poke_id)
+            return JsonResponse({"verified": True,
+                                 "points": points})
+        else:
+            return JsonResponse({"verified": False,
+                                 "points": 0})
+    except Exception as e:
+        return JsonResponse({"verified": False,
+                             "points": 0,
+                             "exception": e.__class__.__name__})

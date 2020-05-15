@@ -13,5 +13,6 @@ urlpatterns = [
     path("firestore/get/<str:table>/<str:document>", views.get_document, name="Get Document"),
 
     # Service paths
-    path("services/refresh", views.refresh_pokes, name="Refresh Pokes")
+    path("services/refresh", views.refresh_pokes, name="Refresh Pokes"),
+    path("services/check", views.check_poke, name="Check Poke")
 ]
