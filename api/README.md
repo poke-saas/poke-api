@@ -15,14 +15,13 @@ outlining which endpoints to use to accomplish specific tasks.
             - [x] [/{table}/{document name}/](#get-firestore-document-get)
         - [ ] [/add/{table}/](#add-firestore-document-add)
         - [ ] [/delete/{table}/](#delete-firestore-document-delete)
-        - [ ] [/update/{table}/{document name}](#update-firestore-document-update)
+        - [ ] [/update/{table}/{document name}/](#update-firestore-document-update)
     - /auth
         - [ ] [/login/](#user-login-login)
         - [ ] [/logout/](#user-logout-logout)
     - /services
         - [x] [/refresh/](#refresh-user-pokes-refresh)
-        - [ ] [/check/](#verify-that-a-poke-has-been-posted-check)
-        
+        - [x] [/check/](#verify-that-a-poke-has-been-posted-check)
         
 ## Detailed Documentation
 

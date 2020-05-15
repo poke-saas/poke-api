@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from .utils import db_entry as db
+from .utils import auth
 from .social_media import validators, twitter
 from flask import jsonify
 from django.views.decorators.csrf import csrf_exempt
@@ -50,4 +51,18 @@ def check_poke(request):
     except Exception as e:
         return JsonResponse({"verified": False,
                              "points": 0,
+                             "exception": e.__class__.__name__})
+
+
+@csrf_exempt
+def login(request):
+    try:
+        body = request.body.decode('utf-8')
+        data = json.loads(body)
+        uname = data['uname']
+        pwd = data['pwd']
+        user = auth.login_internal(uname, pwd)
+        return JsonResponse({"user": user})
+    except Exception as e:
+        return JsonResponse({"user": None,
                              "exception": e.__class__.__name__})
