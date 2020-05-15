@@ -1,4 +1,4 @@
-from api.poke_main.utils.db_entry import *
+from poke_main.utils.db_entry import *
 from .twitter import *
 from .instagram import *
 from .facebook import *

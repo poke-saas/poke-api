@@ -7,20 +7,21 @@ outlining which endpoints to use to accomplish specific tasks.
 
 ### API Structure:
 #### Key: Curly braces denote a url {parameter}, otherwise all endpoints follow a tree structure. Click on a leaf node to view its documentation.
+##### A check mark next to the endpoint means it has been implemented.
 - /api
-    - [/test/](#testing-endpoint-test)
+    - [x] [/test/](#testing-endpoint-test)
     - /firestore
         - /get
-            - [/{table}/{document name}/](#get-firestore-document-get)
-        - [/add/{table}/](#add-firestore-document-add)
-        - [/delete/{table}/](#delete-firestore-document-delete)
-        - [/update/{table}/{document name}](#update-firestore-document-update)
+            - [x] [/{table}/{document name}/](#get-firestore-document-get)
+        - [ ] [/add/{table}/](#add-firestore-document-add)
+        - [ ] [/delete/{table}/](#delete-firestore-document-delete)
+        - [ ] [/update/{table}/{document name}](#update-firestore-document-update)
     - /auth
-        - [/login/](#user-login-login)
-        - [/logout/](#user-logout-logout)
+        - [ ] [/login/](#user-login-login)
+        - [ ] [/logout/](#user-logout-logout)
     - /services
-        - [/refresh/](#refresh-user-pokes-refresh)
-        - [/check/](#verify-that-a-poke-has-been-posted-check)
+        - [x] [/refresh/](#refresh-user-pokes-refresh)
+        - [ ] [/check/](#verify-that-a-poke-has-been-posted-check)
         
         
 ## Detailed Documentation
