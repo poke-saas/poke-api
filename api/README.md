@@ -17,7 +17,7 @@ outlining which endpoints to use to accomplish specific tasks.
         - [ ] [/delete/{table}/](#delete-firestore-document-delete)
         - [ ] [/update/{table}/{document name}/](#update-firestore-document-update)
     - /auth
-        - [ ] [/login/](#user-login-login)
+        - [x] [/login/](#user-login-login)
         - [ ] [/logout/](#user-logout-logout)
     - /services
         - [x] [/refresh/](#refresh-user-pokes-refresh)
