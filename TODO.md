@@ -10,3 +10,10 @@ API instead, making it easier and more intuitive to get data and work with data 
 - [x] Seperate project into several apps based on functionality.
 - [x] Create dataclasses for the serialization of objects stored in firestore.
 
+### TODO (deadline: Friday, May 22nd)
+- [ ] Finish API endpoints for managerial console (add, delete, update)
+- [ ] Implement JWT Token Authentication for signed in users
+- [ ] Enforce HTTPS (Let's Encrypt SSL)
+- [ ] Write unit tests to verify endpoints are working and to test edge cases
+
+
