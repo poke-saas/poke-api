@@ -78,25 +78,23 @@ def augment_document(request, command):
         # Get template from table
         table = db.get_table_from_document(json_data)
         template = db.get_template_from_table(table)
-        print(table)
         # Set fields of the template from our data
         for key in json_data:
             template[key] = json_data[key]
 
         id = auth.create_random_uid()
         template['id'] = id
-        print(template)
-        # Add document to firestore
-        doc_ref = db.DB.collection(table).document(template['id'])
-        doc_ref.set(template)
         # Check to see if we are adding something that belongs to an organization
         if table != db.ORGS_TABLE:
             if template["org_id"] == str():
                 # If our object doesn't have an org id attribute, delete it and throw an exception.
-                delete_document({"table": table, "document_id": id})
                 raise TypeError
             else:
                 db.add_to_organization(table, id, template['org_id'])
+
+        # Add document to firestore
+        doc_ref = db.DB.collection(table).document(template['id'])
+        doc_ref.set(template)
         return template
 
     def delete_document(json_data):
@@ -105,8 +103,8 @@ def augment_document(request, command):
         to_return = db.DB.collection(table).document(id).get().to_dict()
         db.DB.collection(table).document(id).delete()
         # Check if we need to also delete from org
-        # if table != db.ORGS_TABLE:
-        #     db.delete_from_org(table, to_return['org_id'], id)
+        if table != db.ORGS_TABLE:
+            db.delete_from_org(table, to_return['org_id'], id)
         return to_return
 
     def update_document(json_data):
@@ -114,12 +112,10 @@ def augment_document(request, command):
         # Get template from table
         table = db.get_table_from_document(json_data)
         template = db.get_template_from_table(table)
-        print(table)
         # Set fields of the template from our data
         for key in json_data:
             template[key] = json_data[key]
 
-        print(template)
         # Add document to firestore
         doc_ref = db.DB.collection(table).document(template['id'])
         doc_ref.set(template)

@@ -418,11 +418,23 @@ def add_to_organization(table, id, org_id):
         print(e)
 #             return False
 
-# def delete_from_org(table, org_id, document_id):
-#     org = get_org(org_id)
-#     if table == USERS_TABLE:
-#         users = org.to_dict()
-
+def delete_from_org(table, org_id, document_id):
+    org = get_org(org_id)
+    if table == USERS_TABLE:
+        users = org['user_ids']
+        users.remove(document_id)
+        org['users_ids'] = users
+        set_org(org_id, org)
+    elif table == POKES_TABLE:
+        pokes = org['poke_ids']
+        pokes.remove(document_id)
+        org['poke_ids'] = pokes
+        set_org(org_id, org)
+    elif table == REWARDS_TABLE:
+        rewards = org['reward_ids']
+        rewards.remove(document_id)
+        org['reward_ids'] = rewards
+        set_org(org_id, org)
 
 if __name__ == '__main__':
     print(get_table_from_id("5f0453ef3ae1caba5ed229f61965422a"))
