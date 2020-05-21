@@ -19,7 +19,6 @@ outlining which endpoints to use to accomplish specific tasks.
     - /auth
         - [x] [/login/](#user-login-login)
         - [ ] [/logout/](#user-logout-logout)
-        - [ ] [/register/]()
     - /services
         - [x] [/refresh/](#refresh-user-pokes-refresh)
         - [x] [/check/](#verify-that-a-poke-has-been-posted-check)
@@ -92,13 +91,7 @@ The *add* endpoint will also automatically update the organization's information
 - On fail: null body
 
 ## User Register (register)
-- Purpose: To add a new user and tie them to an organization.
-- Absolute URL: `/api/auth/register/`
-- Method type: POST
-- Body format: JSON Object containing user's username (email), password and organization.
-    - `{"uname": "[username / email]", "pwd": "[user_password]", "org_id": "[org_id]"}`
-- Response: JSON Object containing success message.
-- On fail: null body
+- Deprecated, use add with a user object instead
 
 ## Refresh User Pokes (refresh)
 - Purpose: To refresh the list of pokes available to the user.
