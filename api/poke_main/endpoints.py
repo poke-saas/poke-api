@@ -11,6 +11,7 @@ urlpatterns = [
     # TODO: Make seperate Django apps for each base (firestore, services, auth)
     # Firestore paths
     path("firestore/get/<str:table>/<str:document>/", views.get_document, name="Get Document"),
+    path("firestore/<str:command>/", views.augment_document, name="Augment Document"),
 
     # Auth paths
     path("auth/login/", views.login, name="Login"),

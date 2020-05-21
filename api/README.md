@@ -13,12 +13,13 @@ outlining which endpoints to use to accomplish specific tasks.
     - /firestore
         - /get
             - [x] [/{table}/{document name}/](#get-firestore-document-get)
-        - [ ] [/add/{table}/](#add-firestore-document-add)
-        - [ ] [/delete/{table}/](#delete-firestore-document-delete)
-        - [ ] [/update/{table}/{document name}/](#update-firestore-document-update)
+        - [x] [/add/](#add-firestore-document-add)
+        - [x] [/delete/](#delete-firestore-document-delete)
+        - [x] [/update/](#update-firestore-document-update)
     - /auth
         - [x] [/login/](#user-login-login)
         - [ ] [/logout/](#user-logout-logout)
+        - [ ] [/register/]()
     - /services
         - [x] [/refresh/](#refresh-user-pokes-refresh)
         - [x] [/check/](#verify-that-a-poke-has-been-posted-check)
@@ -33,6 +34,13 @@ outlining which endpoints to use to accomplish specific tasks.
 - Response: Example JSON Response, sanity check.
 - On fail: Error code 400
 
+## Firestore Endpoints
+For the *add* and *update* endpoints, I've made them smart. You don't have to explicitly declare what
+kind of document you're updating or adding, it will automatically determine that information by
+pattern matching the incoming JSON. ([List of valid JSON bodies here](#json-schemas).)
+
+The *add* endpoint will also automatically update the organization's information with the reward, poke or user you're adding.
+
 ## Get Firestore Document (get)
 - Purpose: To get firestore documents from the API as JSON.
 - Absolute URL: `/api/firestore/get/{table}/{document id}`
@@ -43,7 +51,7 @@ outlining which endpoints to use to accomplish specific tasks.
 
 ## Add Firestore Document (add)
 - Purpose: To add documents to firestore without direct console access.
-- Absolute URL: `/api/firestore/add/{table}`
+- Absolute URL: `/api/firestore/add/`
 - Method type: POST
 - Body Format: JSON object containing required fields of an object you're trying to add ([list of valid JSON bodies here](#json-schemas).)
 - Response: JSON Object containing object you've added to the firestore.
@@ -51,17 +59,17 @@ outlining which endpoints to use to accomplish specific tasks.
 
 ## Delete Firestore Document (delete)
 - Purpose: To delete documents from firestore without direct console access.
-- Absolute URL: `/api/firestore/delete/{table}/{document id}`
+- Absolute URL: `/api/firestore/delete/`
 - Method Type: POST
-- Body format: None required.
+- Body format: `{"table": "table_id", "document_id": "document_id"}`
 - Response: JSON Object containing object removed from Firestore.
 - On fail: null body
 
 ## Update Firestore Document (update)
 - Purpose: To update firestore documents.
-- Absolute url: `/api/firestore/update/{table}/{document id}`
+- Absolute url: `/api/firestore/update/`
 - Method type: POST
-- Body format: JSON Object containing updated fields of an object in firestore.
+- Body format: JSON object containing required fields of an object you're trying to update ([list of valid JSON bodies here](#json-schemas).)
 - Response: JSON Object containing updated fields as they exist in firestore.
 - On fail: null body
 
@@ -80,6 +88,15 @@ outlining which endpoints to use to accomplish specific tasks.
 - Method type: POST
 - Body format: JSON Object containing auth token.
     - `{"token": "eXaMpLetOkEn"}`
+- Response: JSON Object containing success message.
+- On fail: null body
+
+## User Register (register)
+- Purpose: To add a new user and tie them to an organization.
+- Absolute URL: `/api/auth/register/`
+- Method type: POST
+- Body format: JSON Object containing user's username (email), password and organization.
+    - `{"uname": "[username / email]", "pwd": "[user_password]", "org_id": "[org_id]"}`
 - Response: JSON Object containing success message.
 - On fail: null body
 
@@ -145,6 +162,7 @@ Example Poke Schema:
     "desc": "This is a test for HackIllinois 2020!",
     "name": "Twitter Test",
     "pts": 25
+    "org_id": "[id of organization]"
 }
 ```
 
@@ -183,5 +201,6 @@ Example Reward Schema:
     "img": "https://www.bayshoreoutfitters.com/wp-content/uploads/2019/01/Better-Sweater-Jacket_Birch-White.jpg",
     "desc": "Brand new Patagonia jacket!",
     "name": "Patagonia Jacket"
+    "org_id" "[id of organization]
 }
 ```

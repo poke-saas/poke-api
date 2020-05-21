@@ -211,10 +211,9 @@ def add_org_media():
     pass
 
 
-def add_org_user(oid, user_ref):
+def add_org_user(oid, user_id):
     org = DB.collection(ORGS_TABLE).document(oid).get().to_dict()
-    user = DB.collection(USERS_TABLE).document(user_ref).get().to_dict()
-    org['user_ids'].append(user['id'])
+    org['user_ids'].append(user_id)
     set_org(oid, org)
 
 
@@ -365,5 +364,65 @@ def get_all_elements():
     return all_fields
 
 
+def get_table_from_id(document_id):
+    # Check tables for document with matching id
+    all_tables = [USERS_TABLE, POKES_TABLE, REWARDS_TABLE, ORGS_TABLE]
+    for table in all_tables:
+        doc_ref = DB.collection(table)
+        for doc in doc_ref.stream():
+            if (doc.id == document_id):
+                return doc.to_dict()
+    return None
+
+
+def get_table_from_document(doc_data):
+    if "full_name" in doc_data:
+        return USERS_TABLE
+    elif "cta" in doc_data:
+        return POKES_TABLE
+    elif "reward_ids" in doc_data:
+        return ORGS_TABLE
+    elif "cost" in doc_data:
+        return REWARDS_TABLE
+    else:
+        return None
+
+def get_template_from_table(table):
+    if table == USERS_TABLE:
+        return get_user_template()
+    elif table == ORGS_TABLE:
+        return get_orgs_template()
+    elif table == POKES_TABLE:
+        return get_poke_template()
+    elif table == REWARDS_TABLE:
+        return get_reward_template()
+    else:
+        return None
+
+
+def add_to_organization(table, id, org_id):
+    try:
+        # If we are adding a user
+        if table == USERS_TABLE:
+            add_org_user(org_id, id)
+        # If we are adding a poke
+        elif table == POKES_TABLE:
+            add_org_poke(org_id, id)
+        # If we are adding a reward
+        elif table == REWARDS_TABLE:
+            add_org_reward(org_id, id)
+
+    #     else:
+    #         return False
+    except Exception as e:
+        print(e)
+#             return False
+
+# def delete_from_org(table, org_id, document_id):
+#     org = get_org(org_id)
+#     if table == USERS_TABLE:
+#         users = org.to_dict()
+
+
 if __name__ == '__main__':
-    pass
+    print(get_table_from_id("5f0453ef3ae1caba5ed229f61965422a"))
